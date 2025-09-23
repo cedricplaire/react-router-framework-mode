@@ -1,0 +1,1 @@
+import{w as o,o as s}from"./chunk-B7RQU5TL-CQbPFoM8.js";const c=o(function(e){const t=e.guestBook;return s.jsx("div",{children:s.jsxs("ul",{className:"text-center",children:[s.jsx("li",{className:"p-3",children:"Personnes ayant signer"}),t.map(({id:a,name:n})=>s.jsx("li",{className:"p-3",children:n},a))]})})});export{c as default};
