@@ -15,6 +15,13 @@
       "when": 1758503166554,
       "tag": "0001_outstanding_zzzax",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1758666468787,
+      "tag": "0002_living_senator_kelly",
+      "breakpoints": true
     }
   ]
 }
