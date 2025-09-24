@@ -1,9 +1,15 @@
+type RoleType = 'guest' | 'user' | 'admin';
+type SexType = 'male' | 'female';
+
 type guestUser = {
-    fullName: string;
-    nickName: string;
-    avatar?: string | null;
-    id: number;
-  }[];
+  id: number;
+  firstName: string;
+  lastName: string;
+  avatar: string | null;
+  email: string | null;
+  sex: SexType | null;
+  role: RoleType | null;
+}[];
 
 export default function UserTable({users}: {users: guestUser}) {
     return (
@@ -29,25 +35,25 @@ export default function UserTable({users}: {users: guestUser}) {
                                 <img
                                   src={'/evil-rabbit.png'}
                                   className="rounded-full"
-                                  alt={`${customer.nickName}'s profile picture`}
+                                  alt={`${customer.firstName}'s profile picture`}
                                   width={28}
                                   height={28}
                                 />
-                                <p>{customer.nickName}</p>
+                                <p>{customer.firstName}</p>
                               </div>
                             </div>
                             <p className="text-sm text-gray-500">
-                              {customer.fullName}
+                              {customer.firstName} - {customer.lastName}
                             </p>
                           </div>
                         </div>
                         <div className="flex w-full items-center justify-between border-b py-5">
                           <div className="flex w-1/2 flex-col">
-                            <p className="text-xs">FullName</p>
-                            <p className="font-medium">{customer.nickName}</p>
+                            <p className="text-xs">EMail</p>
+                            <p className="font-medium">{customer.email}</p>
                           </div>
                           <div className="flex w-1/2 flex-col">
-                            <p className="text-xs">NickName</p>
+                            <p className="text-xs">ID</p>
                             <p className="font-medium">{customer.id}</p>
                           </div>
                         </div>
@@ -61,10 +67,10 @@ export default function UserTable({users}: {users: guestUser}) {
                           Avatar
                         </th>
                         <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                          FullName
+                          FulltName
                         </th>
                         <th scope="col" className="px-3 py-5 font-medium">
-                          NickName
+                          EMail
                         </th>
                         <th scope="col" className="px-3 py-5 font-medium">
                           ID
@@ -80,18 +86,18 @@ export default function UserTable({users}: {users: guestUser}) {
                               <img
                                 src={'/evil-rabbit.png'}
                                 className="rounded-full"
-                                alt={`${customer.nickName}'s profile picture`}
+                                alt={`${customer.firstName}'s profile picture`}
                                 width={28}
                                 height={28}
                               />
-                              <p>{customer.nickName}</p>
+                              <p>{customer.firstName}</p>
                             </div>
                           </td>
                           <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
-                            {customer.fullName}
+                            {customer.lastName}
                           </td>
                           <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
-                            {customer.nickName}
+                            {customer.email}
                           </td>
                           <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                             {customer.id}

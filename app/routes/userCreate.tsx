@@ -13,23 +13,28 @@ export function meta({}: Route.MetaArgs) {
 
 export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();
-  let fullName = formData.get("fullName");
-  let nickName = formData.get("nickName");
+  let firstName = formData.get("firstName");
+  let lastName = formData.get("lastName");
   let avatar = formData.get("avatar");
-  if (typeof fullName !== "string" || typeof nickName !== "string" || typeof avatar !== "string") {
-    return { guestUsersError: "fullName, nickName and avatar are required" };
+  let email = formData.get("email");
+  let birthday = formData.get("birthday");
+  let sex = formData.get("sex");
+  let role = formData.get("role");
+  if (typeof firstName !== "string" || typeof lastName !== "string" || typeof avatar !== "string" || typeof email !== "string") {
+    return { guestUsersError: "firstName, lastName and avatar are required" };
   }
 
-  fullName = fullName.trim();
-  nickName = nickName.trim();
+  firstName = firstName.trim();
+  lastName = lastName.trim();
   avatar = avatar.trim();
-  if (!fullName || !nickName || !avatar) {
-    return { guestUsersError: "fullName, nickName and avatar are required" };
+  email = email.trim();
+  if (!firstName || !lastName || !avatar || !email) {
+    return { guestUsersError: "firstName, lastName and email are required" };
   }
 
   const db = database();
   try {
-    await db.insert(schema.usersLZ).values({ fullName, nickName, avatar });
+    await db.insert(schema.usersLZ).values({ firstName, lastName, email, avatar, sex, role });
   } catch (error) {
     return { guestUsersError: "Error adding to guest book" };
   }
@@ -41,9 +46,12 @@ export async function loader({ context }: Route.LoaderArgs) {
   const guestUser = await db.query.usersLZ.findMany({
     columns: {
       id: true,
-      fullName: true,
-      nickName: true,
-      avatar: true
+      firstName: true,
+      lastName: true,
+      avatar: true,
+      email: true,
+      sex: true,
+      role: true
     },
   });
 

@@ -1,16 +1,15 @@
-import type { SexType } from '@faker-js/faker';
-
-type SubscriptionTier = 'free' | 'basic' | 'business';
+type RoleType = 'guest' | 'user' | 'admin';
+type SexType = 'male' | 'female';
 
 interface User {
   _id: string;
-  avatar: string;
-  birthday: Date;
+  avatar?: string;
+  birthday?: Date;
   email: string;
   firstName: string;
   lastName: string;
-  sex: SexType;
-  subscriptionTier: SubscriptionTier;
+  sex?: SexType;
+  role?: RoleType;
 }
   
   export type Customer = {

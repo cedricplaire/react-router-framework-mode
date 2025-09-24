@@ -1,5 +1,8 @@
 import { Form, useNavigation } from "react-router";
-import UserTable from './usersTable'
+import UserTable from './usersTable';
+
+type RoleType = 'guest' | 'user' | 'admin';
+type SexType = 'male' | 'female';
 
 export function UserList({
     guestUser,
@@ -7,10 +10,13 @@ export function UserList({
     message,
   }: {
     guestUser: {
-      fullName: string;
-      nickName: string;
-      avatar?: string | null;
       id: number;
+      firstName: string;
+      lastName: string;
+      avatar: string | null;
+      email: string | null;
+      sex: SexType | null;
+      role: RoleType | null;
     }[];
     guestUserError?: string;
     message: string;
@@ -36,15 +42,16 @@ export function UserList({
                 }}
               >
                 <input
-                  name="fullName"
-                  placeholder="FullName"
+                  name="firstName"
+                  type="text"
+                  placeholder="firstName"
                   required
                   className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
                 />
                 <input
-                  name="nickName"
+                  name="lastName"
                   type="text"
-                  placeholder="NickName"
+                  placeholder="lastName"
                   required
                   className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
                 />
@@ -52,9 +59,53 @@ export function UserList({
                   name="avatar"
                   type="text"
                   placeholder="Profil avatar"
-                  required
                   className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
                 />
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="Profil email"
+                  className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
+                />
+                <fieldset>
+          <legend className="mb-2 block text-sm font-medium">
+            Set the sex
+          </legend>
+          <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
+            <div className="flex gap-4">
+              <div className="flex items-center">
+                <input
+                  id="male"
+                  name="sexm"
+                  type="radio"
+                  value="male"
+                  className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                />
+                <label
+                  htmlFor="male"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
+                >
+                  male
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  id="female"
+                  name="sexf"
+                  type="radio"
+                  value="female"
+                  className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                />
+                <label
+                  htmlFor="female"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                >
+                  female
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
                 <button
                   type="submit"
                   disabled={navigation.state === "submitting"}
