@@ -1,4 +1,4 @@
-import { integer, pgTable, pgEnum, serial, text, varchar, jsonb } from "drizzle-orm/pg-core";
+import { integer, pgTable, pgEnum, serial, text, varchar, jsonb, date } from "drizzle-orm/pg-core";
 import { relations } from 'drizzle-orm';
 import { seed } from "drizzle-seed";
 
@@ -18,6 +18,7 @@ export const usersLZ = pgTable("usersLZ", {
   lastName: varchar({ length: 128 }).notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
   avatar: varchar({ length: 255 }),
+  birthday: date({ mode: 'date' }),
   sex: sexEnum(),
   role: rolesEnum().default("guest")
 });
