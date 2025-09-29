@@ -7,6 +7,7 @@ type guestUser = {
   lastName: string;
   avatar: string | null;
   email: string | null;
+  birthday: Date | null;
   sex: SexType | null;
   role: RoleType | null;
 }[];
@@ -76,6 +77,9 @@ export default function UserTable({users}: {users: guestUser}) {
                           EMail
                         </th>
                         <th scope="col" className="px-3 py-5 font-medium sm:pl-6">
+                          birthday
+                        </th>
+                        <th scope="col" className="px-3 py-5 font-medium sm:pl-6">
                           Genre
                         </th>
                         <th scope="col" className="px-3 py-5 font-medium sm:pl-6">
@@ -109,6 +113,9 @@ export default function UserTable({users}: {users: guestUser}) {
                           </td>
                           <td className="whitespace-nowrap bg-gray-800 px-4 py-5 text-gray-200 text-sm">
                             {customer.email}
+                          </td>
+                          <td className="whitespace-nowrap bg-gray-800 px-4 py-5 text-gray-200 text-sm">
+                            {customer.birthday?.toLocaleDateString()}
                           </td>
                           <td className="whitespace-nowrap bg-gray-800 px-4 py-5 text-gray-200 text-sm">
                             {customer.sex}

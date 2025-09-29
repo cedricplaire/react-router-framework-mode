@@ -33,14 +33,15 @@ export async function action({ request }: Route.ActionArgs) {
   }
   // parser la date (ou la laisser à null)
   const ParsedBirthday = typeof birthday === "string" && birthday ? new Date(birthday) : null;
+  const pathName = typeof avatar === "string" && avatar ? avatar.toString() : undefined;
 
   const db = database();
   try {
     await db.insert(schema.usersLZ).values({ 
-      avatar,
       firstName,
       lastName,
       email,  
+      avatar: pathName,
       birthday: ParsedBirthday,
       sex: typeof sex === "string" ? sex : null,
       role: typeof role === "string" ? role : undefined }).returning();

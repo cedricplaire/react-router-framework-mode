@@ -1,27 +1,24 @@
 import { Form, useNavigation } from "react-router";
-import UserTable from "./usersTable";
 import { rolesEnum } from "~/database/schema";
 
 type RoleType = "guest" | "user" | "admin";
 type SexType = "male" | "female";
 
-export function UserList({
-  guestUser,
+export function UserEdit({
+  userbeb,
   guestUserError,
-  message,
 }: {
-  guestUser: {
+  userbeb: {
     id: number;
     firstName: string;
     lastName: string;
-    avatar: string | null;
-    email: string | null;
-    birthday: Date | null;
-    sex: SexType | null;
-    role: RoleType | null;
-  }[];
+    email: string;
+    avatar: string;
+    birthday: Date;
+    sex: SexType;
+    role: RoleType;
+};
   guestUserError?: string;
-  message: string;
 }) {
   const navigation = useNavigation();
 
@@ -44,10 +41,16 @@ export function UserList({
               }}
             >
               <input
+                type="hidden"
+                name="id"
+                value={userbeb?.id ?? ""}
+              />
+              <input
                 name="firstName"
                 type="text"
                 id="firstName"
-                placeholder="FirstName"
+                placeholder={userbeb?.firstName}
+                //value={userbeb?.firstName}
                 required
                 className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:border-gray-500 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
               />
@@ -55,30 +58,33 @@ export function UserList({
                 name="lastName"
                 type="text"
                 id="lastName"
-                placeholder="LastName"
+                placeholder={userbeb?.lastName}
+                //value={userbeb?.lastName}
                 required
                 className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:border-gray-500 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
               />
               <input
                 name="avatar"
-                type="text"
+                type="file"
                 id="avatar"
-                placeholder="path to avatar"
+                placeholder={userbeb?.avatar}
+                //value={userbeb?.avatar}
                 className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:border-gray-500 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
               />
               <input
                 name="email"
                 type="email"
                 id="email"
-                placeholder="your@email.com"
-                required
+                placeholder={userbeb?.email}
+                //value={userbeb?.email}
+                readOnly
                 className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:border-gray-500 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
               />
               <input
                 type="Date"
                 id="birthday"
                 name="birthday"
-                defaultValue="22-10-1985"
+                placeholder={userbeb?.birthday.toDateString()}
                 min="1960-01-01"
                 max="2007-12-31"
                 className="w-full mb-0 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:border-gray-500 dark:focus:ring-blue-500 h-12 px-6 rounded-t-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
@@ -98,6 +104,7 @@ export function UserList({
                         name="sex"
                         type="radio"
                         value="male"
+                        checked={userbeb?.sex === 'male'}
                         className="h-4 w-4 cursor-pointer hover:border-gray-500 border-gray-600 bg-gray-200 text-gray-800 focus:ring-2"
                       />
                       <label
@@ -113,6 +120,7 @@ export function UserList({
                         name="sex"
                         type="radio"
                         defaultChecked
+                        checked={userbeb?.sex === 'female'}
                         value="female"
                         className="h-4 w-4 cursor-pointer hover:border-gray-500 border-gray-600 bg-gray-200 text-gray-800 focus:ring-2"
                       />
@@ -135,7 +143,7 @@ export function UserList({
                 title="selection of role"
                 name="role"
                 className="peer block w-full cursor-pointer pr-2 h-12 mb-0 rounded-t-md border hover:border-gray-500 border-gray-700 bg-gray-800 text-gray-200 py-2 pl-10 text-sm placeholder:text-gray-500"
-                defaultValue="guest"
+                value="guest"
               >
                 <option value="" disabled>
                   Choose a role
@@ -171,9 +179,6 @@ export function UserList({
           </section>
         </div>
       </div>
-          <div className="w-full p-6">
-              <UserTable users={guestUser} />
-            </div>
     </main>
   );
 }
