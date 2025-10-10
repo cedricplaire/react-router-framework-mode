@@ -13,7 +13,7 @@ export function meta({}: Route.MetaArgs) {
 
 export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();
-  console.log({formData});
+  //console.log({formData});
   let firstName = formData.get("firstName");
   let lastName = formData.get("lastName");
   let avatar = formData.get("avatar");
@@ -34,17 +34,32 @@ export async function action({ request }: Route.ActionArgs) {
   // parser la date (ou la laisser à null)
   const ParsedBirthday = typeof birthday === "string" && birthday ? new Date(birthday) : null;
   const pathName = typeof avatar === "string" && avatar ? avatar.toString() : undefined;
+  const genre = sex === "male" ? schema.sexEnum.enumValues[0] : schema.sexEnum.enumValues[1];
+  let roleRight;
+  schema.rolesEnum.enumValues.forEach((right, i) => {
+    if (role === right[i])
+      roleRight = schema.rolesEnum.enumValues[i];
+  }) 
 
-  const db = database();
+  const db = database(); 
+  type NewUser = typeof schema.usersLZ.$inferInsert;
+  const insertUser = async (user: NewUser) => {
+    return db.insert(schema.usersLZ).values(user);
+  }
+  const newUser: NewUser = {
+    id: 0,
+    firstName,
+    lastName,
+    email,  
+    avatar: pathName,
+    birthday: ParsedBirthday,
+    sex: genre,
+    role: roleRight,
+  };
+  //await insertUser(newUser);
+
   try {
-    await db.insert(schema.usersLZ).values({ 
-      firstName,
-      lastName,
-      email,  
-      avatar: pathName,
-      birthday: ParsedBirthday,
-      sex: typeof sex === "string" ? sex : null,
-      role: typeof role === "string" ? role : undefined }).returning();
+    await insertUser(newUser)
   } catch (error) {
     return { guestUsersError: "Error adding to guest book" };
   }
@@ -55,7 +70,7 @@ export async function loader({ context }: Route.LoaderArgs) {
 
   const guestUser = await db.query.usersLZ.findMany({
       columns: {
-        id: true,
+      id: true,
       firstName: true,
       lastName: true,
       avatar: true,

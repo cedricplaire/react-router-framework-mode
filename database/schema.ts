@@ -13,7 +13,7 @@ export const guestBook = pgTable("guestBook", {
 });
 
 export const usersLZ = pgTable("usersLZ", {
-  id: serial('id').primaryKey(),
+  id: integer('id').primaryKey(),
   firstName: varchar({ length: 255 }).notNull(),
   lastName: varchar({ length: 128 }).notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
@@ -28,7 +28,7 @@ export const usersRelations = relations(usersLZ, ({ one }) => ({
 }));
 
 export const profileInfo = pgTable('profile_info', {
-	id: serial('id').primaryKey(),
+	id: integer('id').primaryKey(),
 	userId: integer('user_id').references(() => usersLZ.id),
 	metadata: jsonb('metadata'),
   biography: text(),

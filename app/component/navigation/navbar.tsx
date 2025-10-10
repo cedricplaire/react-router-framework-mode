@@ -6,7 +6,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 const navigation = [
   { name: 'Home', href: '/', current: true },
   { name: 'CreateUser', href: '/createuser', current: false },
-  { name: 'EditUser', href: '/edituser/4', current: false },
+  { name: 'EditUser', href: '/edituser/2', current: false },
   { name: 'About', href: 'about', current: false },
 ]
 
@@ -114,7 +114,7 @@ export default function NavBar() {
         </div>
       </div>
 
-      <DisclosurePanel className="sm:hidden">
+      <DisclosurePanel className="sm:hidden border-b-2 border-gray-600">
         <div className="space-y-1 px-2 pt-2 pb-3">
           {navigation.map((item) => (
             <DisclosureButton

@@ -15,7 +15,7 @@ const links = [
     href: '/about',
     icon: DocumentDuplicateIcon,
   },
-  { name: 'Clients', href: '/createuser', icon: UserGroupIcon },
+  { name: 'Clients', href: '/userslist', icon: UserGroupIcon },
 ];
 
 export default function NavLinks({ open }: { open: boolean }) {

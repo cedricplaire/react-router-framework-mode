@@ -6,10 +6,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
+import { useState } from "react";
 import type { Route } from "./+types/root";
+import AcmeLogo from "./component/navigation/acme-logo";
+import NavLinks from "./component/navigation/nav-links";
 import "./app.css";
-import SideBar from "./component/navigation/sidebar";
 import NavBar from "./component/navigation/navbar";
 
 export const links: Route.LinksFunction = () => [
@@ -26,6 +27,11 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleIsOpen = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <html lang="en">
       <head>
@@ -35,13 +41,53 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="overflow-y-auto">
-        <div className="flex h-screen flex-col md:flex-row">
-          <div className="flex-none margin-bottom=-1000px">
-            <SideBar />
+        <div
+          className={`h-full ${isOpen ? "w-64" : "w-20"} fixed bottom-0 bg-gray-800 text-gray-200 transition-width duration-300`}
+        >
+          <div className="flex items-center justify-between p-4 ml-1 border-b border-gray-600">
+            <h1
+              className={`text-lg ml-2 font-semibold ${isOpen ? "block" : "hidden"}`}
+            >
+              Minimize ToolBar
+            </h1>
+            <button
+              title="switch bar"
+              type="button"
+              onClick={handleIsOpen}
+              className="p-2 rounded-md hover:bg-gray-900/50 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-white"
+            >
+              <svg
+                className="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={
+                    isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"
+                  }
+                />
+              </svg>
+            </button>
           </div>
-          <main className="w-full ml-0">
+          <div className="flex items-center justify-between py-4 pl-4 border-b border-gray-600">
+            <AcmeLogo open={isOpen} />
+          </div>
+          <div>
+            <NavLinks open={isOpen} />
+          </div>
+        </div>
+        <div
+          className={`h-full ${isOpen ? "ml-64" : "ml-20"}  bottom-0 bg-gray-950 text-gray-200 transition-width duration-300`}
+        >
+          <main className="w-full">
             <NavBar />
-            {children}
+            <div className="p-6 md:p-4">{children}</div>
           </main>
         </div>
         <ScrollRestoration />

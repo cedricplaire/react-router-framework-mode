@@ -10,9 +10,9 @@ type guestUser = {
   birthday: Date | null;
   sex: SexType | null;
   role: RoleType | null;
-}[];
+};
 
-export default function UserTable({users}: {users: guestUser}) {
+export default function UserTable({users}: {users: guestUser[]}) {
     return (
         <div className="w-full intems-center">
           <h1 className={`my-4 text-xl md:text-2xl justify-self-center`}>

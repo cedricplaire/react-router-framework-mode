@@ -1,5 +1,4 @@
 import { Form, useNavigation } from "react-router";
-import { rolesEnum } from "~/database/schema";
 
 type RoleType = "guest" | "user" | "admin";
 type SexType = "male" | "female";
@@ -41,9 +40,10 @@ export function UserEdit({
               }}
             >
               <input
-                type="hidden"
+                type="text"
                 name="id"
-                value={userbeb?.id ?? ""}
+                title="id of selected user"
+                value={userbeb?.id}
               />
               <input
                 name="firstName"
@@ -166,12 +166,12 @@ export function UserEdit({
               <button
                 type="submit"
                 disabled={navigation.state === "submitting"}
-                className="w-full h-10 px-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                className="w-full h-10 px-3 text-white bg-blue-400 rounded-lg hover:bg-blue-800"
               >
                 Sign-up on LearnZic
               </button>
               {guestUserError && (
-                <p className="text-red-500 dark:text-red-400">
+                <p className="text-red-700 dark:text-red-400">
                   {guestUserError}
                 </p>
               )}

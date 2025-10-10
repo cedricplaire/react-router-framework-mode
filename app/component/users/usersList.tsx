@@ -47,7 +47,7 @@ export function UserList({
                 name="firstName"
                 type="text"
                 id="firstName"
-                placeholder="FirstName"
+                placeholder="firstName"
                 required
                 className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:border-gray-500 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
               />
@@ -55,7 +55,7 @@ export function UserList({
                 name="lastName"
                 type="text"
                 id="lastName"
-                placeholder="LastName"
+                placeholder="lastName"
                 required
                 className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:border-gray-500 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
               />
@@ -63,14 +63,14 @@ export function UserList({
                 name="avatar"
                 type="text"
                 id="avatar"
-                placeholder="path to avatar"
+                placeholder="avatar"
                 className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:border-gray-500 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
               />
               <input
                 name="email"
                 type="email"
                 id="email"
-                placeholder="your@email.com"
+                placeholder="email"
                 required
                 className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:border-gray-500 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
               />
@@ -78,9 +78,9 @@ export function UserList({
                 type="Date"
                 id="birthday"
                 name="birthday"
-                defaultValue="22-10-1985"
+                defaultValue="1985-11-01"
                 min="1960-01-01"
-                max="2007-12-31"
+                max="2011-12-31"
                 className="w-full mb-0 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:border-gray-500 dark:focus:ring-blue-500 h-12 px-6 rounded-t-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
               />
               <label
